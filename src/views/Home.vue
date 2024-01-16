@@ -2,30 +2,40 @@
 import HomeMenu from "../components/Home/HomeMenu.vue";
 import {ref} from "vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import Playlists from "../components/Home/Playlists.vue";
 
 const showMenu = ref(true);
 </script>
 
 <template>
-  <aside class="show_aside" v-if="showMenu">
-    <div class="aside_top">
-      <h1 class="aside_h1">Musicfy</h1>
-      <button class="aside_btn" type="button" @click="showMenu = false">
-        <font-awesome-icon icon="fa-solid fa-chevron-left" />
+  <div class="container">
+    <aside class="show_aside" v-if="showMenu">
+      <div class="aside_top">
+        <h1 class="aside_h1">Musicfy</h1>
+        <button class="aside_btn" type="button" @click="showMenu = false">
+          <font-awesome-icon icon="fa-solid fa-chevron-left" />
+        </button>
+      </div>
+      <div class="aside_menu">
+        <HomeMenu/>
+      </div>
+    </aside>
+    <aside v-if="!showMenu" class="menu_bar">
+      <button class="aside_btn" type="button" @click="showMenu = true">
+        <font-awesome-icon icon="fa-solid fa-chevron-right" />
       </button>
-    </div>
-    <div class="aside_menu">
-      <HomeMenu/>
-    </div>
-  </aside>
-  <aside v-if="!showMenu" class="menu_bar">
-    <button class="aside_btn" type="button" @click="showMenu = true">
-      <font-awesome-icon icon="fa-solid fa-chevron-right" />
-    </button>
-  </aside>
+    </aside>
+    <main>
+      <Playlists />
+    </main>
+  </div>
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+}
+
 .show_aside {
   display: flex;
   flex-direction: column;
@@ -76,5 +86,8 @@ const showMenu = ref(true);
   padding: 50px 0 0 0;
 }
 
+main {
+  width: 100%;
+}
 
 </style>
