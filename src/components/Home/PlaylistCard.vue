@@ -3,17 +3,11 @@
 const props = defineProps({
   data: Object
 });
-
-const getImageUrlByHeight = (height: number) => {
-  const image = props.data && props.data.images.find(img => img.height === height);
-  return image ? image.url : null;
-};
 </script>
 
 <template>
   <div class="container">
-    <img alt="Imagem de capa da playlist" :src="getImageUrlByHeight(640)"/>
-    <p>{{ props.data && props.data.name }}</p>
+    <img alt="Imagem de capa da playlist" :src="props.data && props.data.images[0].url"/>
   </div>
 </template>
 
@@ -25,7 +19,7 @@ const getImageUrlByHeight = (height: number) => {
 }
 
 img {
-  width: 300px;
-  height: 300px;
+  width: 450px;
+  height: 450px;
 }
 </style>

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import { usePlaylistsStore } from "../../store/playlists.ts";
 import PlaylistCard from "./PlaylistCard.vue";
 
 const store = usePlaylistsStore()
-store.getPlaylists()
+store.getPlaylists(0)
 </script>
 
 <template>
@@ -12,10 +11,12 @@ store.getPlaylists()
     <div class="top">
       <h1 class="main_h1">Feito para você</h1>
       <div class="controls">
-        <div class="chevrons">
+        <button type="button" class="chevrons" @click="store.moveLeft()" :class="{ 'disabled': store.startIndex === 0 }">
           <font-awesome-icon icon="fa-solid fa-chevron-left" />
+        </button>
+        <button type="button" class="chevrons" @click="store.moveRight()" :class="{ 'disabled': store.startIndex === 3 }">
           <font-awesome-icon icon="fa-solid fa-chevron-right" />
-        </div>
+        </button>
         <a href="#">Ver todos</a>
       </div>
     </div>
@@ -46,29 +47,34 @@ store.getPlaylists()
 
 .controls {
   display: flex;
-  gap: 40px;
+  align-items: center;
+  gap: 20px;
 }
 
 .controls a {
-  text-decoration: none;
   color: white;
   font-weight: 400;
   font-size: 16px;
 }
 
 .chevrons {
+  border: none;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   cursor: pointer;
+  background-color: transparent;
+  color: white;
 }
 
 .playlists-container {
-  display: grid;
-  justify-content: center;
-  width: 100%;
-  grid-template-columns: 30% 30% 30%;
-  grid-gap: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.31);
 }
 </style>
