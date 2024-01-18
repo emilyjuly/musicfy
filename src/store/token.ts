@@ -11,7 +11,7 @@ const instanceToken: AxiosInstance = axios.create({
 
 export const useTokenStore = defineStore('token', {
     actions: {
-        async getToken() {
+        async getToken(): Promise<object> {
             const clientId = import.meta.env.VITE_CLIENT_ID;
             const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
             const grantType = import.meta.env.VITE_GRANT_TYPE;
@@ -23,8 +23,7 @@ export const useTokenStore = defineStore('token', {
 
             try {
                 const response = await instanceToken.post('/token', data);
-                localStorage.clear()
-                localStorage.setItem('access_token', response.data.access_token)
+                return response.data.access_token
             } catch (error) {
                 console.error('Erro ao obter token:', error);
                 throw error;

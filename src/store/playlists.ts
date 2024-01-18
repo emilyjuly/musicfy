@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
-import instance from "../axiosConfig.ts";
 import { useTokenStore } from "./token.ts";
-import axios from 'axios'
+import axios, {AxiosInstance} from 'axios'
 interface Playlist {
     collaborative: boolean;
     description: string;
@@ -41,10 +40,19 @@ export const usePlaylistsStore = defineStore('playlists', {
             const tokenStore = useTokenStore();
             const playlistsId: string[] = ['37i9dQZF1DX6aTaZa0K6VA', '37i9dQZF1EQoqCH7BwIYb7', '37i9dQZF1EQncLwOalG3K7', '37i9dQZF1EQnqst5TRi17F', '37i9dQZF1EVJHK7Q1TBABQ', '37i9dQZF1EVHGWrwldPRtj']
             this.playlists = [];
+            const token = await tokenStore.getToken()
+            const api: AxiosInstance = axios.create({
+                baseURL: 'https://api.spotify.com/v1',
+                timeout: 5000,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + token
+                }
+            })
 
             try {
                 for (let i = startIndex; i < startIndex + 3; i++) {
-                    const response = await instance.get(`/playlists/${playlistsId[i]}`)
+                    const response = await api.get(`/playlists/${playlistsId[i]}`)
                     this.playlists.push(response.data)
                     console.log(response.data)
                 }
