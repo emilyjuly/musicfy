@@ -8,7 +8,7 @@
 }
 
 body, html {
-    height: 100%;
+    min-height: 100vh;
     background-image: url("/bg-app.jpg");
     background-position: center;
     background-repeat: no-repeat;

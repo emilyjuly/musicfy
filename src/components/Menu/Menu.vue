@@ -28,8 +28,8 @@ const showMenu = ref(true);
 <style scoped>
 .show_aside {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
-  height: 100vh;
   width: 20%;
   background: rgba(21, 21, 21, 0.25);
   backdrop-filter: blur(5px);
