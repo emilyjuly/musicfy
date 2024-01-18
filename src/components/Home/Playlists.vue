@@ -40,12 +40,12 @@ const navigateRight = () => {
       </div>
     </div>
     <div class="playlists-container" v-if="!seeAll">
-      <div v-for="playlist in store.playlists.slice(startIndex, lastIndex)" :key="playlist.id">
+      <div v-for="playlist in store.playlists.slice(startIndex, lastIndex)">
         <PlaylistCard :data="playlist"/>
       </div>
     </div>
     <div class="playlists-grid" v-if="seeAll">
-      <div v-for="playlist in store.playlists" :key="playlist.id">
+      <div v-for="playlist in store.playlists">
         <PlaylistCard :data="playlist"/>
       </div>
     </div>

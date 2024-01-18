@@ -34,7 +34,7 @@ interface Playlist {
 }
 
 export const usePlaylistsStore = defineStore('playlists', {
-    state: () => ({ playlists: [] as Playlist[] | string[] }),
+    state: () => ({ playlists: [] as Playlist[]}),
     actions: {
         async getPlaylists(): Promise<void>{
             const tokenStore = useTokenStore();
