@@ -51,8 +51,8 @@ export const usePlaylistsStore = defineStore('playlists', {
             } catch (error) {
                 if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
                     console.log('O token é inválido, ', error)
-                    tokenStore.getToken();
-                    this.getPlaylists(0)
+                    await tokenStore.getToken();
+                    await this.getPlaylists(0)
                 }
                 console.error('Não foi possível obter as playlists, ', error)
             }

@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import Playlists from "../components/Home/Playlists.vue";
 import Menu from "../components/Menu/Menu.vue"
-import {useTokenStore} from "../store/token.ts";
-
-const tokenStore = useTokenStore()
-tokenStore.getToken()
 </script>
 
 <template>
