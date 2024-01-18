@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import instance from "../axiosConfig.ts";
 import { useTokenStore } from "./token.ts";
-
+import axios from 'axios'
 interface Playlist {
     collaborative: boolean;
     description: string;
@@ -49,9 +49,12 @@ export const usePlaylistsStore = defineStore('playlists', {
                     console.log(response.data)
                 }
             } catch (error) {
-                console.error('O token é inválido.', error)
-                tokenStore.getToken();
-                this.getPlaylists(0)
+                if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
+                    console.log('O token é inválido, ', error)
+                    tokenStore.getToken();
+                    this.getPlaylists(0)
+                }
+                console.error('Não foi possível obter as playlists, ', error)
             }
         },
 
